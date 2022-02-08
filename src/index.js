@@ -27,6 +27,7 @@ function onDOMLoaded() {
 
 function renderTodosFromSStorage() {
   let todos = getTodosFromSStorage();
+  todoSelect.disabled = (!todos.length) ? true : false;
 
   todos.forEach((todoValue) => {
     const todoItem = getTodoItem(todoValue);
@@ -43,6 +44,7 @@ function addTodo(event) {
 
   const todoItem = getTodoItem(todoInput.value);
   todoList.appendChild(todoItem);
+  todoSelect.disabled = false;
 
   clearTodoInput(todoInputWrapper);
 }

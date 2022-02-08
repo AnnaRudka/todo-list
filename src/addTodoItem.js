@@ -1,4 +1,4 @@
-import { removeTodoFromSStorage } from "./sessionStorage";
+import { getTodosFromSStorage, removeTodoFromSStorage } from "./sessionStorage";
 
 export const getTodoItem = (text) => {
   // Create Todo Item
@@ -22,19 +22,22 @@ export const getTodoItem = (text) => {
   const removeButton = document.createElement("button");
   removeButton.innerHTML = '<i class="fas fa-trash"></i>';
   removeButton.classList.add("todo-remove-button");
-  removeButton.addEventListener("click", removeTodoItem(todoItem));
+  removeButton.addEventListener("click", handleRemoveButtonClick(todoItem));
   todoItem.appendChild(removeButton);
 
   return todoItem;
 };
 
-function removeTodoItem(todoItem) {
+function handleRemoveButtonClick(todoItem) {
   return (e) => {
     e.preventDefault();
     todoItem.classList.add("todo-item_fall");
     todoItem.addEventListener("transitionend", function () {
       removeTodoFromSStorage(todoItem);
       todoItem.remove();
+      let todos = getTodosFromSStorage();
+      const todoSelect = document.querySelector(".todo-select");
+      todoSelect.disabled = (!todos.length) ? true : false;
     });
   };
 }
