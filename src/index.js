@@ -8,6 +8,7 @@ import {
   clearTodoInput,
   getTodoInputItems,
   validateTodoInput,
+  preventEnterClick
 } from "./todoInput";
 
 const todoInputWrapper = document.querySelector(".todo-input-wrapper");
@@ -17,6 +18,7 @@ const todoSelect = document.querySelector(".todo-select");
 
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
 todoInput.addEventListener("input", () => validateTodoInput(todoInputWrapper));
+todoInput.addEventListener("keypress", (e) => preventEnterClick(e, todoInput));
 todoButton.addEventListener("click", addTodo);
 todoSelect.addEventListener("change", filterTodos);
 

@@ -23,6 +23,12 @@ export function validateTodoInput(todoInputWrapper) {
   }
 }
 
+export function preventEnterClick(e, todoInput) {
+  if (e.key === "Enter" && todoInput.value.length < 3) {
+    e.preventDefault();
+  };
+}
+
 export function clearTodoInput(todoInputWrapper) {
   const { todoInput, todoHelper, todoButton } =
     getTodoInputItems(todoInputWrapper);
