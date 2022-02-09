@@ -37,7 +37,7 @@ function handleRemoveButtonClick(todoItem) {
       todoItem.remove();
       let todos = getTodosFromSStorage();
       const todoSelect = document.querySelector(".todo-select");
-      todoSelect.disabled = (!todos.length) ? true : false;
+      todoSelect.disabled = !todos.length ? true : false;
     });
   };
 }

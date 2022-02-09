@@ -8,17 +8,22 @@ import {
   clearTodoInput,
   getTodoInputItems,
   validateTodoInput,
-  preventEnterClick
+  preventEnterClick,
 } from "./todoInput";
 
 const todoInputWrapper = document.querySelector(".todo-input-wrapper");
-const { todoInput, todoButton } = getTodoInputItems(todoInputWrapper);
+const { todoInput, todoHelper, todoButton } =
+  getTodoInputItems(todoInputWrapper);
 const todoList = document.querySelector(".todo-list");
 const todoSelect = document.querySelector(".todo-select");
 
 document.addEventListener("DOMContentLoaded", onDOMLoaded);
 todoInput.addEventListener("input", () => validateTodoInput(todoInputWrapper));
 todoInput.addEventListener("keypress", (e) => preventEnterClick(e, todoInput));
+todoInput.addEventListener("blur", () => {
+  todoHelper.classList.remove("todo-helper_visible");
+});
+todoInput.addEventListener("focus", () => validateTodoInput(todoInputWrapper));
 todoButton.addEventListener("click", addTodo);
 todoSelect.addEventListener("change", filterTodos);
 
@@ -29,7 +34,7 @@ function onDOMLoaded() {
 
 function renderTodosFromSStorage() {
   let todos = getTodosFromSStorage();
-  todoSelect.disabled = (!todos.length) ? true : false;
+  todoSelect.disabled = !todos.length ? true : false;
 
   todos.forEach((todoValue) => {
     const todoItem = getTodoItem(todoValue);
