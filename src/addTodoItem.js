@@ -1,13 +1,16 @@
-import { getTodosFromSStorage, removeTodoFromSStorage } from "./sessionStorage";
+import { getTodosFromSStorage, removeTodoFromSStorage, updateStatusInSStorage } from "./sessionStorage";
 
-export const getTodoItem = (text) => {
+export const getTodoItem = ({value, isCompleted}) => {
   // Create Todo Item
   const todoItem = document.createElement("li");
   todoItem.classList.add("todo-item");
+  if (isCompleted) {
+    todoItem.classList.toggle("todo-item_completed");
+  }
 
   // Create and add Todo Text
   const todoText = document.createElement("span");
-  todoText.innerText = text;
+  todoText.innerText = value;
   todoText.classList.add("todo-text");
   todoItem.appendChild(todoText);
 
@@ -46,5 +49,6 @@ function toggleCheckButton(todoItem) {
   return (e) => {
     e.preventDefault();
     todoItem.classList.toggle("todo-item_completed");
+    updateStatusInSStorage(todoItem);
   };
 }

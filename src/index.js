@@ -46,10 +46,10 @@ function renderTodosFromSStorage() {
 
 function addTodo(event) {
   event.preventDefault();
+  const newTodo = {value: todoInput.value, isCompleted: false};
+  saveTodoToSStorage(newTodo);
 
-  saveTodoToSStorage(todoInput.value);
-
-  const todoItem = getTodoItem(todoInput.value);
+  const todoItem = getTodoItem(newTodo);
   todoList.appendChild(todoItem);
   todoSelect.disabled = false;
 

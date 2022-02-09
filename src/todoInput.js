@@ -30,7 +30,7 @@ export function preventEnterClick(e, todoInput) {
 }
 
 export function clearTodoInput(todoInputWrapper) {
-  const { todoInput, todoButton } = getTodoInputItems(todoInputWrapper);
+  const { todoInput, todoHelper, todoButton } = getTodoInputItems(todoInputWrapper);
 
   todoInput.value = "";
   todoButton.classList.add("todo-button_disabled");
